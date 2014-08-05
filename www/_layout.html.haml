@@ -1,0 +1,82 @@
+!!!
+%html.no-js{lang: 'en' }
+  %head
+    %title
+      Prozac Blues
+    %meta{ charset: 'utf-8'}
+
+    %meta{ content: 'index, follow', name: 'robots'}
+    %meta{ content: '', name: 'description'}
+    %meta{ content: '', name: 'author'}
+
+    %script{ src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js' }
+
+    %link{ type: 'text/css', rel: 'stylesheet', href: href('/prozacblues.css') }
+
+    %link{href: '', rel: 'alternate', title: 'RSS', type: 'application/rss+xml' }
+    %link{href: '', rel: 'icon' }
+
+  %body
+
+    %header
+      %figure<>
+        .masthead
+          %h1
+            Prozac
+            %br<>
+            Blues
+          %p
+            Down &amp; Brown
+            %br
+            since 1998
+
+    .main.grid
+
+      %article.col-3-4
+
+        = yield
+
+      %aside.col-1-4
+
+        %h3 Furthermore
+        %p
+          Does this aside work?
+
+
+    %footer.grid
+      .col-3-4
+        %h3 All this...
+        %p
+          %strong Prozac Blues
+          is the personal website of
+          %a{href: href('/travo/') }
+            Travis Winters
+          and is shared with his buddy
+          = succeed '.' do
+            %a{href: href('/dave/') }
+              David Willis
+          If you're hungry for more there's a whole bunch of stuff in Travo&rsquo;s blog
+          = succeed '.' do
+            %a{href: href('/blog/archives.html') }archive
+        %p
+          %small
+            %strong
+              All material &copy;
+              = Date.today.year
+              Prozac Blues.
+            %br/
+            Any reproduction, misuse, reuse, mashups, copying, distribution, posting elsewhere as your own is strictly forbidden and serverly frowned upon.
+
+      .col-1-4
+        %h3 And more
+        %p
+          %strong Travis Winters
+          %br/
+          %a.social_link{ href: 'http://twitter.com/travis_winters' }
+            %img{alt: "Travis's Twitter stream", src: href('/images/twitter_16.png') }/
+            Twitter
+          %br/
+          %a.social_link{href: 'http://www.linkedin.com/in/traviswinters' }
+            %img{alt: "Travis's LinkedIn Profile", src: href('/images/linkedin_16.png') }/
+            Linked In
+          %br/
