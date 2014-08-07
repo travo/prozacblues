@@ -5,7 +5,7 @@
 /tmp/
 
 www/_out
-www/.sass-cache
+.sass-cache
 
 Gemfile.lock
 .ruby-*
