@@ -1,0 +1,40 @@
+---
+layout: '/_layout.html.haml'
+main_image: '/images/asbestos-roof-rocks.jpg'
+persona: 'Dave'
+...
+%article.col-3-4.x-ray
+
+  %h1 X-Ray Guitar
+
+  %img.joe-guitar{ src: href('/images/joeGuitarOff.jpg'), alt: 'joe the guitar' }
+
+%aside.col-1-4
+
+
+  %img#beam-button{ src: href('/images/beamOff.jpg') }
+
+  %p
+    Hit the beam button to see what Joe looks like on the inside.
+
+  %p
+    Joe the guitar is named, of course, after
+    %a{ href: 'http://en.wikipedia.org/wiki/Joe_Pass'}Joe Pass
+    — get your homework on.
+
+:javascript
+  $(function(){
+
+    $('#beam-button').click( function(event) {
+      var isOff = this.src.indexOf('beamOff') >= 0;
+      if (isOff) {
+        $(this).attr('src', '../images/beamOn.jpg')
+        $('img.joe-guitar').attr('src', '../images/joeGuitarOn.jpg')
+      } else {
+        $(this).attr('src', '../images/beamOff.jpg')
+        $('img.joe-guitar').attr('src', '../images/joeGuitarOff.jpg')
+      }
+
+    });
+
+  });
