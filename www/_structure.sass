@@ -76,6 +76,7 @@ header
 .main
   max-width: $max-width
   width: $main-width
+  position: relative
 
 article
   width: 100%
@@ -90,6 +91,33 @@ aside
   color: #000
   padding: 0 1em
   padding-top: 4.5em !important
+
+figure
+  &.small
+    display: block
+    float: left
+    margin-right: 1em
+    padding-bottom: 1em
+    img
+      max-width: 250px
+      max-height: 250px
+
+.clear
+  clear: both
+
+.f-right
+  float: right
+
+.f-left
+  float: left
+
+.padded-lr
+  padding-left: 1em
+  padding-right: 1em
+
+.padded-tb
+  padding-top: 1em
+  padding-bottom: 1em
 
 
 footer

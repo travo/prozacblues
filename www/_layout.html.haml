@@ -11,10 +11,11 @@
 
     %script{ src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js' }
 
+    %link{ href: '', rel: 'icon' }
+    %link{ href: '', rel: 'alternate', title: 'RSS', type: 'application/rss+xml' }
     %link{ type: 'text/css', rel: 'stylesheet', href: href('/prozacblues.css') }
 
-    %link{href: '', rel: 'alternate', title: 'RSS', type: 'application/rss+xml' }
-    %link{href: '', rel: 'icon' }
+    = main_header_image
 
   %body
 
@@ -32,16 +33,7 @@
 
     .main.grid
 
-      %article.col-3-4
-
-        = yield
-
-      %aside.col-1-4
-
-        %h3 Furthermore
-        %p
-          Does this aside work?
-
+      = yield
 
     %footer.grid
       .col-3-4
