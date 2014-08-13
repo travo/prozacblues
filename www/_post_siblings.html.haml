@@ -1,0 +1,8 @@
+%article.siblings.col-3-4
+  - if page.meta['previous_item']
+    .previous.f-left
+      %a{ href: href(page.meta['previous_item']) } Previous
+
+  - if page.meta['next_item']
+    .next.f-right
+      %a{ href: href(page.meta['next_item']) } Next

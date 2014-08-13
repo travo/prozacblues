@@ -21,8 +21,10 @@
 
     ~ include('/_header.html.haml')
 
-    .main.grid
+    .main.grid.blog
 
       = yield
+
+      ~ include('/_post_siblings.html.haml')
 
     ~ include('/_footer.html.haml')
