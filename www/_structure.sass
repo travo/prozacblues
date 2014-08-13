@@ -72,19 +72,27 @@ header
       p
         font-family: 'ChunkFive'
 
-
 .main
   max-width: $max-width
   width: $main-width
   position: relative
+
+  &.blog
+    article
+      p:first-of-type
+        font-size: 1.2em
+        line-height: 1.6em
 
 article
   width: 100%
   color: #000
   background-color: $color-beige
   padding: 0 1em 3em
+  overflow-y: hidden
   h1, h2, h3, p
     padding-right: 1em
+  h1:first-child
+    margin-top: -7px
 
 aside
   width: 100%
@@ -119,6 +127,15 @@ figure
   padding-top: 1em
   padding-bottom: 1em
 
+.siblings
+  margin-top: 0.25em
+  margin-bottom: 2em
+  padding: 0.5em 1em
+  a
+    text-align: center
+    width: 6em
+  .next
+    margin-right: 1em
 
 footer
   max-width: $max-width
