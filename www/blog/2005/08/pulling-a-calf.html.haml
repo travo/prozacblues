@@ -1,0 +1,47 @@
+---
+layout: '/_post.html.haml'
+main_image: '/images/guide-to-pants-off-living-rocks.jpg'
+persona: 'Post'
+title: Pulling a Calf
+post_date: 2005-08-16
+next_item: /blog/2005/08/content-strippe.html
+previous_item: /blog/2005/08/my-friend-flick.html
+topics: pants_off_living
+...
+%article.col-3-4
+  %h1 Pulling a Calf
+  %p
+    I've been a web developer now for years. While not as long as some, long enough to have had my fair share of problems with deployment. Fortunately, for the last few years I've been developing websites which  are hosted on
+    %a{:href => "http://www.webcentral.com.au/"} Web Central
+    production servers.
+  %p
+    Today, I'm deploying a
+    = succeed "." do
+      %a{:href => "http://www.yamahamusic.com.au/"} new website
+    In this case, 'deploying' is a sophisticated term for essentially what is the most suckiest of jobs - FTP'ing a whole bunch of new pages and asp scripts to a live site...and desperately hoping that nothing goes wrong.
+  %p
+    This, as my learned and experienced friends will rightly tell me, sucks. But there is little that I can do about it. My development environment is probably
+    = succeed "," do
+      %em very different
+    from my live environment; I can't tell - I'm not the admistrator of that server. Can't go near it.
+  %p
+    And as has happened today, things
+    %em are
+    very different, a problem with the way my session variables are being handled has revealed itself and there's nothing I can do about it but call Web Central.
+  %p God bless 'em. They've really streamlined and improved their customer service heaps since the early days. I'm grateful to receive considerate, thoughtful and expedient assistance when things go strangely, like today.
+  %p So what's the subject of this post got to do with it? - Well, releasing a website can be a little like giving birth, sometimes it's easy and that little puppy will just pop out and shoot across the room like a mechanical tennis ball server. Occasionally, it can go pear shaped and you'll spend an afternoon, buried up to your armpits in the metaphorical cows uterus that is your work trying to get that damn website up.
+  %p Fun. You bet.
+  %h3 Comments
+  %ol.comments
+    %li
+      %dl
+        %dt
+          %strong
+            %a{:href => "http://www.rupertjones.com", :rel => "nofollow", :title => "http://www.rupertjones.com"} Rup
+          %br/
+          %small 29 August 2005
+        %dd
+          %p Trav, I realise that the server settings being changed is well within the "out of my control department", but to ease your deployment pain you could develop a script in perl or whatever to FTP the files and whatever else needs to happen for you. It's not much but as somone who's had my fair share of deployment stress in the past, automating as much as possible is the most achievable relief giver.
+  
+%aside.col-1-4
+  ~ include('/_post_meta.html.haml')

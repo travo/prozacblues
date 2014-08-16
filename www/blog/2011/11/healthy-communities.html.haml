@@ -1,0 +1,26 @@
+---
+layout: '/_post.html.haml'
+main_image: '/images/guide-to-pants-off-living-rocks.jpg'
+persona: 'Post'
+title: Healthy communities and website performance.
+post_date: 2011-11-30
+next_item: /blog/2011/12/community-security.html
+previous_item: /blog/2011/09/ownership.html
+topics: geeky_stuff, pants_off_living
+...
+%article.col-3-4
+  %h1 Healthy communities and website performance.
+  %p It has come as a recent surpise to me that despite your best efforts to make a website perform faster, you may eventually have to throttle it because its success comes at the detriment of a community of websites.
+  %p I'm a director of a cooperative open to all subscribers who may pay a tiny monthly fee to host their website and email on our server. We rent rackspace and buy bandwidth at commercial rates. We have worked hard, and grown slowly over eight years to build a community of nerds, artists, fan-clubs, small business and non-profits who will share the bill for those commercial services.
+  %p Our monthly subscriber fee doesn't include a commercial hosting service. None the less, our small team of volunteer members work hard to provide the best care that we can for the needs of our diverse subscriber base. We try to resolve email forwarding and routing problems, we work very hard to prevent our server from being breached by the sometimes apocalyptic storm of hackers trying to break in and we work very, very hard to minimise the amount of bandwidth that our server uses.
+  %p Occasionally we are subject to extraordinary bandwidth events. As a result we're also subject to the additional charges associated with that bandwidth. We try hard to maintain a fair balance between keeping our monthly subscriber charges low and selecting a monthly bandwidth strategy that suits the needs of our subscribers. This includes the traffic to their domains and also any amount of email traffic they sustain.
+  %p Extraordinary bandwidth events have included a slash-dotting and recently a link from the BBC News website to one of our subscriber websites. They're infrequent, but can consume nearly half of our monthly bandwidth allowance in twelve hours and if unchecked can be devastating.
+  %p On the other hand we host one or two websites which sustain moderate daily traffic and need our attention to ensure they run efficiently.
+  %p One of those websites is a fan forum which accounts for a very large portion of our monthly traffic. We found that by helping them improve the performance of their website — tuning their database, tuning apache, g-zipping their pages among a bunch of other tweaks — their traffic increased. By doing this, we overlooked the simplest equation; if you make web pages load faster, visitors will use that advantage to view more pages. Viewing more pages meant more outgoing traffic, which meant that we'd be using more of our bandwidth!
+  %p All this has finally lead to us throttling the website. It's completely opaque to our subscriber and their visitors in that they have noticed no discernible difference in the speed of the website. Ultimately it keeps the outgoing bandwidth on that website way down and within manageable levels.
+  %p
+    We've done all we can to keep the server from huffing and puffing. We've also done the right thing by our subscribers to ensure that there is enough bandwidth available for everyone. We also have enough bandwidth for additional subscribers, their growth and the occasional burst in traffic.
+    %br/
+  
+%aside.col-1-4
+  ~ include('/_post_meta.html.haml')

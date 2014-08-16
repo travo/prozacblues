@@ -1,0 +1,63 @@
+---
+layout: '/_post.html.haml'
+main_image: '/images/guide-to-pants-off-living-rocks.jpg'
+persona: 'Post'
+title: Telling Capistrano to Deploy from a Branch on EngineYard
+post_date: 2008-10-31
+next_item: /blog/2008/12/ignoring-artist.html
+previous_item: /blog/2008/06/life-is-tough.html
+topics: geeky_stuff, pants_off_living
+...
+%article.col-3-4
+  %h1 Telling Capistrano to Deploy from a Branch on EngineYard
+  %p
+    I definitely got exited by
+    %a{:href => "http://www.redhillconsulting.com.au/blogs/simon/archives/000430.html"} Simon's simple tweak
+    to his deploy.rb to ensure that he wasn't accidentally deploying to production. So it was with confidence that I started hacking at my deploy.rb to set up deployment from my repository branch.
+    = succeed "," do
+      %a{:href => "http://www.missiondata.com/blog/ruby/84/deploying-an-svn-branch-with-capistrano/"} This simple tip helped
+    but with a little help from Mike, we took it further.
+  %p Since we're deploying to EngineYard, we've got the added bonus of using a filtered_remote_cache, so we need to make sure our repository cache is updated with the new branch path.
+  %p
+    %code
+      %pre
+        %br/
+        if variables.include?(:branch)
+        %br/
+        set :svn_path,      "branches/\#{branch}"
+        %br/
+        else
+        %br/
+        set :svn_path,      'trunk'
+        %br/
+        end
+        %br/
+        set :repository,          "https://yourrepo.com/appname/\#{svn_path}/"
+        %br/
+        set :repository_cache,    "/var/cache/engineyard/\#{application}/\#{svn_path}"
+        %br/
+  %p Then in the :deploy namespace add this chunk of goodness (tip 'o the hat to Simon)
+  %p
+    %code
+      %pre
+        %br/
+        task :confirm do
+        %br/
+        unless Capistrano::CLI.ui.agree("Sure you want to deploy from \#{repository}? (yes/no): ")
+        %br/
+        puts "No worries, use --set-before branch=whatever to deploy from a specific branch if it exists."
+        %br/
+        exit
+        %br/
+        end
+        %br/
+        end
+        %br/
+        before "deploy:update_code", "deploy:confirm"
+        %br/
+  %p This should give you the branch control you need when you're deploying code and migrations, but it won't interfere noisily with your other capistrano tasks.
+  %p Ideally, what we should be aiming for is the deploy.rb to be "repository / branch aware", so that if you're in a branch (or tag), then it deploys from there.
+  %p Thoughts?
+  
+%aside.col-1-4
+  ~ include('/_post_meta.html.haml')

@@ -1,0 +1,51 @@
+---
+layout: '/_post.html.haml'
+main_image: '/images/guide-to-pants-off-living-rocks.jpg'
+persona: 'Post'
+title: 'Getting Leopard Licked: installing postgres82 with MacPorts'
+post_date: 2007-11-01
+next_item: /blog/2008/02/handwringing.html
+previous_item: /blog/2007/10/whos-gonna-make-the-gravy.html
+topics: geeky_stuff, pants_off_living
+...
+%article.col-3-4
+  %h1 Getting Leopard Licked: installing postgres82 with MacPorts
+  %p
+    Without a doubt the most challenging unix-on-a-mac-like thing I've had to do is install the Postgres database server on my MacBook Pro. I persisted with the MacPorts approach (I like MacPorts, any package manager is a good thing) and finally found a solution that
+    = succeed "." do
+      %em worked for me
+    I say this because there are many legitimate solutions out there... the trick is finding one that works for you.
+  %p One of the most ironical things about this, is that in one of my final emails at Yamaha Music went along the lines of, "... do not do this. It won't work. Not even if you try twice." I tried some of these solutions, over and over again, crossing fingers and waving dead chickens around hoping that by the glory of geebers, something would work.
+  %p
+    The first discovery was that there is a
+    %a{:href => "http://trac.macports.org/projects/macports/ticket/12994"} MacPorts ticket
+    for the problems I was encountering - this details are similar to the grief I was having, but not the same.
+  %p
+    Further Google searches on the problem revealed some helpful advice from Lee Packam's blog; he had a handy post describing the same kinda problem, but with a
+    %a{:href => "http://leenux.org.uk/dtrace-patches/dtrace-with-postgres-on-osx/"} specific patch for DTrace
+    and that configurable option.
+  %p
+    I tried this several times yesterday, blindingly hoping that it was something I was doing wrong. The unix side of Mac
+    %strike is
+    was so unfamiliar to me that I didn't have a clue what I was doing.
+  %p
+    Today I came accross
+    = succeed "," do
+      %a{:href => "http://www.gelens.org/2007/10/29/postgresql_in_leopard_using_ma"} Jeffrey Gelens post
+    who was also unable to build using the Packam DTrace fix, but with some twiddling came up with a solution that worked for him. I tried this a couple of times (to be sure) and still it didn't work.
+  %p
+    Finally, with more googling I found the InVisible Blog, that describes a way to
+    = succeed "." do
+      %a{:href => "http://blog.invisible.ch/2007/10/28/rails-stack-on-leopard/"} get the whole Rails stack working on Leopard
+    Foturnately, the rest of my Rails stack is pumping, I just needed to get Postgres running.
+  %p This technique combines the previous two in a sensible way, kinda - if you read and look closely, you'll notice that the DTrace patch is probably not required, furthermore, by this time the MacPorts guys had updated the Postgres PortFile to include the Packam DTrace Patch anyway. I'm just not certain that this guy even bothered to include it in his configure command.
+  %p Anyhoo, I'm relieved to finally have it installed and working.
+  %p
+    Why bother? You might also ask; well, as one of my new colleagues suggested, if possible my applications should be database platform independent -- which makes sense. So I
+    %em did
+    have MySQL 5 running by yesterday evening.
+  %p All in all, a painful experience. I probably would have been much, much easier if I'd waited for a month or two - hell, even a couple of weeks for the MacPort weenies to have sussed it out.
+  %p Oh well, I'm here now... which way to the bar?
+  
+%aside.col-1-4
+  ~ include('/_post_meta.html.haml')

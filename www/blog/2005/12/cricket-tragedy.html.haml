@@ -1,0 +1,94 @@
+---
+layout: '/_post.html.haml'
+main_image: '/images/guide-to-pants-off-living-rocks.jpg'
+persona: 'Post'
+title: Cricket Tragedy
+post_date: 2005-12-22
+next_item: /blog/2006/01/im-calling-a-mo.html
+previous_item: /blog/2005/12/for-your-next-c.html
+topics: pants_off_living
+...
+%article.col-3-4
+  %h1 Cricket Tragedy
+  %p
+    The new
+    %a{:href => "http://www.cricket.com.au/"} Cricket Australia
+    website is a shambles. A couple of weeks have passed and I'm still smarting from my first impressions which described it in much poorer terms. Even now I am still unimpressed to say the least.
+  %p Top to bottom, inside and out this website is an example of what not to do; poor navigation, weak content structure and information architecture, poor accesibility, poor usability, ill concieved advertising strategy, thoughtless use of flash, invalid markup, key content items lost below the page fold and, above all the Cricket Australia redesign says that it is focused on everything other than the user.
+  %p I'm going to focus on the homepage - Cricket Australia receives more than two million visits a day to this page during a match as visitors from all over the world flock to follow matches and read scorecards.
+  %p
+    %strong Navigation
+    %br/
+    There are two rows dedicated to site-wide navigation at the top of the screen, they are barely 20px high and the font size within these rows is set to only 11px. Since they are fixed font sizes they don't scale (unless you use Firefox) and are quite difficult to read - they might as well not be there. The
+    %a{:href => "http://www.useit.com/papers/webwriting/writing.html"} use of language
+    for navigation has changed and what was once 'Live Scores' as A-Level navigation is now 'Match Focus'. Naming navigation items
+    %a{:href => "http://www.alistapart.com/articles/helpingvisitors"} using plain and unambiguous language
+    makes it less difficult for users to get exactly the content they want, it also helps search engines.
+  %p Dynamic, on hover navigation has also been used but the weak information architecture (see below) doesn't actually really necessitate the dynamic nature of the navigation. By forcing a user to visit landing pages you actually create an opportunity to serve more ads.
+  %p
+    %strong
+      Content Structure /
+      %a{:href => "http://www.jjg.net/ia/"} Information Architecture
+    %br/
+    In the past year, Cricket Australia have had the opportunity to monitor the usage and trends on their website to ensure that their content structure best suits their visitors requirements. Given the content displayed to the user above the fold, it seems the user wants large pictures, tickets, merchandise, some audio, a small ad for beer , a regular banner ad promoting local cricket and half a Milo skyscraper banner.
+  %p The following key content items hidden below the fold of the page - key items of interest to the site visitor - are latest scores and links to scorecards, upcoming matches and forthcoming events. Why? In it's previous incarnation the latest scorecards where right at the top of the page, exactly where they needed to be when visitors to the site were getting match updates.
+  %p
+    %strong Advertsing
+    %br/
+    As I look at it now, three of the four advertisements on the homepage are promoting Cricket Australia events, programs and merchandise. The fourth is a cross promotion for Victoria Bitter beer using (the great) David Boon as a shadowy dodgy caricature of his legendary self. I'm not certain that sacrificing so much screen real estate for in-house promotions is an effective use of content space. Nor would I consider it the most effective way to promote your own activities and products. Finally, when I have seen a banner ad it has been for yellowpages.com.au. While Sensis has the buying power to purchase these ad spaces, they really don't need the traffic or the money.
+  %p Alternatively Cricket Australia could secure the sponsorship of a partner whos services and products it's users would actually be intereseted in such as Adidas or 3 Mobile.  In this way everyone benefits; users are shown products and services they are likely to click through, those genuine click-throughs generate real income for Cricket Australia, and those click throughs have the potential to generate real leads for those targeted advertisers.
+  %p
+    %strong Flash
+    %br/
+    I think the use of syndicated text and imagery on the homepage is very effective and important for Cricket Australia. Unfortunately, delivering it through flash means that it cannot be indexed and therefore doesn't register as fresh content by search engines. Of course if it hinders accessibility enormously. While ensuring that the provision of content for the vision and hearing impaired is vitally important, current awareness is that
+    = succeed "." do
+      %a{:href => "http://www.seomoz.org/articles/beginners-1-page.php"} providing content that can be indexed easily by Google, Yahoo! and the other search engines can help to improve ratings
+  %p I also don't think that flipping through the six main articles provides any real benefit to the user. I think a more effective way of delivering news would be to ensure that the site had at least one RSS feed so I can monitor news items without having to visit the cricket homepage.
+  %p
+    %strong Markup
+    %br/
+    It's becoming more and more important that your code is well marked up. Again for accessibility, but also for semantics, maintainability, and sanity. And you know... it's what grown up web developers try very hard to do these days;
+    = succeed "," do
+      %a{:href => "http://www.webstandards.org/"} compliance is worth making the effort for
+    it sets a foundation for our industry - acknowledging constraints will put hairs on your chest and in the long run make you a better developer.
+  %p
+    %strong Graphic Design
+    %br/
+    This is the tough one to comment on, because it's always going to be a matter of tastes, but the design is awful. The work on this design suggest that perhaps it was handed to a junior web designer to fiddle about with and finish off. Or worse still a travesty of interference by stakeholders, marketing managers and agency directors - hey I know, I've seen it all - an honest idea can get screwed up horribly.
+  %p
+    There are things though about this design which weaken it, and are really easy to fix such as
+    %a{:href => "http://www.markboulton.co.uk/journal/comments/five_simple_steps_to_designing_grid_systems_part_1/"} implementing a grid
+    and some good old fashioned hyperlinks which look like hyperlinks -
+    = succeed "." do
+      %a{:href => "http://www.useit.com/alertbox/designmistakes.html"} just as Jacob would like them
+    The use of blue is a little consistent as a call action, it's used occasionally for icons and also to highlight headings, it doesn't send a clear message to the user.
+  %p
+    The most sensible thing to have done would have been a
+    = succeed "," do
+      %a{:href => "http://www.alistapart.com/articles/redesignrealign"} realignment rather than a complete redesign
+    the existing design while quite corporate in its appearance was familiar to visitors and the main thing they visited the website for was prominent. Visitors presented with the new design effectively had to re-learn how to use the Cricket Australia website. The key usability lesson here is 'Don't make me think'.
+  %p I hope that in time Cricket Australia and their website partner can realign the current website so that it better serves their passionate user base.
+  %p Finally, a statement of interests; my partner is a project manager with Cricket Australia. Mel managed the initial build of the website nearly two years ago along with many other. That iteration of the website was live for just over twelve months. This iteration is being managed by another division within Cricket. As I understand this iteration was built by advertising agency George Patterson Bates.
+  %h3 Comments
+  %ol.comments
+    %li
+      %dl
+        %dt
+          %strong
+            %a{:href => "http://www.eaves.org/blog/", :rel => "nofollow", :title => "http://www.eaves.org/blog/"} Jon Eaves
+          %br/
+          %small 10 January 2006
+        %dd
+          %p The Boony advertising is vitally important to the CA site, and it appears that my petition for replacing the entire site with a homage to Kegs' greatness is slowly taking place.
+          %p There is never enough pictures of Boony.  Just remember that.
+    %li
+      %dl
+        %dt
+          %strong Tarv
+          %br/
+          %small 10 January 2006
+        %dd
+          %p It appears that he too has finally embraced the goodness that is his alter-ego "the Keg". He may well run for PM at the moment - the entire nation is worshipping at his giant alter.
+  
+%aside.col-1-4
+  ~ include('/_post_meta.html.haml')

@@ -1,0 +1,40 @@
+---
+layout: '/_post.html.haml'
+main_image: '/images/guide-to-pants-off-living-rocks.jpg'
+persona: 'Post'
+title: Six Months on Rails
+post_date: 2008-05-01
+next_item: /blog/2008/05/would-you-work-for-gordon-ramsay.html
+previous_item: /blog/2008/04/keep-your-eyes.html
+topics: geeky_stuff, pants_off_living
+...
+%article.col-3-4
+  %h1 Six Months on Rails
+  %p I've been a full-time commercial rails developer (feels good to say that) for six months now and I want to describe some of what the experience has been like, and importantly what lessons I have learnt coding Ruby, on Rails, for Cogent.
+  %p
+    %strong Specs are your friend...
+    but they can't be trusted.
+  %p One of the first thing that Steve said to me was that while you might be able to get 100% coverage (using RCov along side RSpec) on your code by writing specs, they aren't truly indicative of whether or not your app works as a whole.
+  %p
+    Writing tests against
+    %em every line
+    of code that I'm writing is intense -- and it requires a hell of a lot of discipline. But, this is my reality now and I'm really enjoying the challenges it presents.
+  %p
+    It's one thing to use an exciting new language, but to keep coding the same old shit to solve the same old problems is a shame and a wasted opportunity.  To embrace a set tools and resources though, which encourage you to improve the way you approach those problems
+    %em and
+    sometimes force you to rethink your approach, is really another thing entirely.
+  %p
+    %strong Get your recipes right...
+    and deployment is a dream.
+  %p I spent a horrible week becoming increasingly frustrated at not being able to deploy. We needed to deploy to both our staging environment (which we already successfully deploying to) and our new production environment. I was making a bunch of newbie type mistakes and stumbling all over the place until Rob showed me the light.
+  %p Rob had been using Webistrano to manage the deployment strategies he had for his application quite successfully.  He had also taken advantage of the ease by which you could create and manage the recipes for each stage. And thankfully, he showed me how to weild the same mojo. If you can learn to get your recipes right, then you'll have dreamy deployments too.
+  %p Some advice though is keep your eyes peeled for stray mongrel .pids!
+  %p
+    %strong Your code sucks...
+    no, really.
+  %p The beauty and simplicity of Ruby is like a magnifying glass over every nasty bad habbit you have. Any weakness you have in your understanding and boom, you're exposed for the fraud you are.
+  %p I'm pretty certain that I've been able to obfuscate my weaknesses within the structure of other languages. I guess it's easy to do that with Ruby and Rails too, but rigor that Cogent uses tools like Saikuro, Flog and Simian peel back the veil and show you the horror which your rubbish code.
+  %p Props to Marty for spending some time with me in the early weeks and months helping me to get my act together. I definitely struggled early on, Ruby is a cruel mistress.
+  
+%aside.col-1-4
+  ~ include('/_post_meta.html.haml')
