@@ -1,0 +1,310 @@
+---
+layout: '/_layout.html.haml'
+persona: 'travo'
+...
+%article.col-3-4
+
+  %h1 Wanna See My XML Navigation Technique?
+
+  %p
+    In my experience, half the battle in maintaining and publishing a website management system
+    %sup
+      %a{href: "#1"} [1]
+    is getting your navigation to work properly. It's all well and good having your pages in a database but then you've got to design some kind of system to reflect page #34786 is actually /products/haircair/shampoo.html - and show the accompanying navigation around that. You've got to orient the user in a meaningful way and you've got to manage your pages and site structure easily. Not to mention search engine optimisation and meaningful url's - the list goes on.
+  %p Let me share with you a technique that I use.
+  %p
+    Firstly, how handy would it be if you could maintain your site structure in an XML document? A simple text file - perfect for storing in your favourite source control program, easy to edit, easy to get around and easy to maintain.
+    %sup
+      %a{href: "#2"} [2]
+    Let's have a look at it;
+  %pre
+    :preserve
+      &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+      &lt;site&gt;
+        &lt;nav level="a"&gt;
+          &lt;a href="/default.asp"&gt;Home&lt;/a&gt;
+          &lt;nav level="b" hide="true"&gt;&lt;a href="/contact.asp"&gt;Contact&lt;/a&gt;&lt;/nav&gt;
+          &lt;nav level="b" hide="true"&gt;&lt;a href="/sitemap.asp"&gt;Sitemap&lt;/a&gt;&lt;/nav&gt;
+          &lt;nav level="b" hide="true"&gt;&lt;a href="/privacy.asp"&gt;Privacy&lt;/a&gt;&lt;/nav&gt;
+          &lt;nav level="b" hide="true"&gt;&lt;a href="/search.asp"&gt;Search&lt;/a&gt;&lt;/nav&gt;
+        &lt;/nav&gt;
+        &lt;nav level="a"&gt;
+          &lt;a href="/about/default.asp"&gt;About Enormicom&lt;/a&gt;
+          &lt;nav level="b"&gt;&lt;a href="/about/history.asp"&gt;History &amp; Our Future&lt;/a&gt;&lt;/nav&gt;
+        &lt;/nav&gt;
+        &lt;nav level="a"&gt;
+          &lt;a href="/products/default.asp"&gt;Our Products&lt;/a&gt;
+          &lt;nav level="b"&gt;
+            &lt;a href="/products/product_one/default.asp"&gt;Product One&lt;/a&gt;
+          &lt;/nav&gt;
+          &lt;nav level="b"&gt;
+            &lt;a href="/products/product_two/default.asp"&gt;Product Two&lt;/a&gt;
+            &lt;nav level="c"&gt;&lt;a href="/products/product_two/model_one.asp"&gt;Model One&lt;/a&gt;&lt;/nav&gt;
+            &lt;nav level="c"&gt;&lt;a href="/products/product_two/model_two.asp"&gt;Model Two&lt;/a&gt;&lt;/nav&gt;
+          &lt;/nav&gt;
+        &lt;/nav&gt;
+      &lt;/site&gt;
+
+  %p Does this seem straight forward enough? Each nav element is a node in your site, it has a 'level' attribute which indicates - in a semantic way - which navigation level that node is; a level nav, b level nav, c level nav etc. In each nav node you can store your 'a' tag with all of its attributes.
+  %p One of the caveats is that all of the URL's stored in our XML document need to be absolute. Obviously in many ways, this sucks - and hey, I'm not suggesting that this technique is for everyone. So far I haven't found this to be a problem in the sites I've implemented this technique.
+  %p Another question you might be asking is "Geez, you're parsing a lot of XML there sonny, that's surely gonna be taxing your server there...". You know what - probably. Don't know really, I've never load tested this technique. Never had to. The kinds of sites I've used this on haven't been highly trafficed sites. Having said that though, currently this technique is being used on a site that's receiving between 5,000 and 7,500 page views a day and it's going pretty well.
+  %p I think part of that is in credit to the Microsoft XML Parser; it's actually pretty good. It's very fast, has a great API and is pretty well documented. Go figure.
+  %p
+    Which brings me to my code.
+    %sup
+      %a{href: "#3"} [3]
+  %p Since 2002 I've been coding ASP as JScript rather than VB script, probably more from vanity than anything else - it makes me feel like a 'real programmer'. All of the examples posted here are in JScript, you may find that this will make it easy for you to translate this into your favourite language, it might also suck. Sorry.
+  %p
+    Thanks to a heafty shove from a smart friend, I moved away from building websites just as pages and moved towards building websites that can have pages, but can also have controllers, models and views. God bless ya Warner.
+    %sup
+      %a{href: "#4"} [4]
+  %p Here's my Navigation thing...
+  %pre
+    :preserve
+
+      function Navigation() {
+
+          this.strPage = new String(Request.ServerVariables("PATH_INFO"));
+          this.xmlPath = Server.MapPath("/") + "\\src\\xml\\sitestructure.xml";
+
+          this.xmlDoc = Server.CreateObject("Msxml2.DOMDocument");
+          this.xmlDoc.async = false;
+          this.xmlDoc.resolveExternals = false;
+          this.xmlDoc.preserveWhiteSpace = false;
+          this.xmlDoc.load(this.xmlPath);
+
+          this._drawLeftNav = _drawLeftNav;
+          this._drawTopNav = _drawTopNav;
+          this._drawBreadCrumb = _drawBreadCrumb;
+          this._drawSitemap = _drawSitemap;
+      }
+  %p
+    What you see above is my model for a Navigation object.
+    %sup
+      %a{href: "#5"} [5]
+    It's pretty simple, it has some simple properties which are resolved when you instansiate your object. It also has some key functions which draw the navigation. Lets look at the key one - _drawLeftNav.
+  %p _drawLeftNav - named as a result of the global phenomena known as Left Hand Navigation, truth is though, this could be placed anywhere and styled in any way. This is a recursive function which, as it works it's way through the sitestructure.xml, it draws the primary navigation. It starts by opening a &lt;div&gt; area then draws heading &lt;h1&gt; indicating the root section that you're in and then a bunch of nested unordered lists to, well, list the nav. The page you are currently on is signified with a style="font-weight:bold" attribute, but you can add any attribute you want.
+
+  %pre
+    :preserve
+
+      function _drawLeftNav(objXML, intLevel, targetLevel) {
+
+          var root = objXML.documentElement;
+          level = String.fromCharCode(intLevel + 96);
+
+          var blnTarget = intLevel &gt;= targetLevel?true:false;
+
+          if (intLevel == targetLevel) {
+              var strSection = root.childNodes(0).text
+              var strHref = new String(root.childNodes(0).getAttribute("href"));
+              %&gt;&lt;h1&gt;&lt;a href="&lt;%= strHref %&gt;"&gt;&lt;%= strSection %&gt;&lt;/a&gt;&lt;/h1&gt;&lt;%
+          }
+
+          if (blnTarget) { %&gt;
+          &lt;ul&gt;&lt;% }
+
+          var objNav = root.getElementsByTagName("nav[@level = '" + level + "']");
+          for (var i=0; i &lt; objNav.length; i++) {
+
+              var xmlA = objNav.item(i).childNodes(0)
+              var strHref = new String(objNav.item(i).childNodes(0).getAttribute("href"));
+
+              if (this.strPage.indexOf(strHref)==0) {
+                  objNav.item(i).childNodes(0).setAttribute("style", "font-weight:bold;");
+              }
+
+              if (blnTarget) { %&gt;
+              &lt;li&gt;&lt;%= objNav.item(i).childNodes(0).xml %&gt;&lt;% }
+
+              var tmpXML = Server.CreateObject("Msxml2.DOMDocument");
+                  tmpXML.async = false;
+                  tmpXML.resolveExternals = false;
+
+                  tmpXML.loadXML(objNav.item(i).xml);
+
+                  woot = tmpXML.documentElement;
+
+                  var blnInHere = false;
+                  var nodelist = woot.selectNodes("//a");
+                  for (n = 0; n &lt; nodelist.length; n++) {
+                      if (new String(nodelist.item(n).getAttribute("href")).indexOf(this.strPage) == 0) {
+                          blnInHere = true;
+                          break;
+                      }
+                  }
+
+                  nextLevel = String.fromCharCode(intLevel + 96 + 1);
+                  nextNav = woot.getElementsByTagName("nav[@level = '" + nextLevel + "']");
+
+                  if (nextNav.length &gt; 0 && blnInHere) {
+                      this._drawLeftNav(tmpXML, intLevel+1, targetLevel);
+                  }
+
+              if (blnTarget) { %&gt;&lt;/li&gt;&lt;% }
+          }
+          if (blnTarget) { %&gt;
+          &lt;/ul&gt;&lt;% }
+      }
+  %p Clearly there can be nothing more glorious than legitimately naming a variable 'woot', and I have triumphantly taken advantage of that here.
+  %p Let's go though it bit by bit...(cause that's what all the pro's do)
+  %pre
+    :preserve
+
+      function _drawLeftNav(objXML, curLevel, startLevel) {
+
+          var root = objXML.documentElement;
+          var level = String.fromCharCode(curLevel + 96);
+  %p The function must be called with a chunck of XML, an indication of what level we're currently on (curLevel) and what level to start at (startLevel) which is used to keep us orientated. Two local variables are then set our root xml.documentElement and a character marker (level) to match the semantic level indicator stored in our xml site structure.
+  %pre
+    :preserve
+
+          var blnTarget = curLevel &gt;= startLevel?true:false;
+  %p We must pass in 1 as our current level, and then poke around our xml document until we get to the node that contains our target navigation. If we're at or beyond our target, that's a good thing and we need to record that so we know where we are.
+  %pre
+    :preserve
+
+      if (curLevel == startLevel) {
+          %&gt;&lt;h1&gt;&lt;%= root.childNodes(0).xml %&gt;&lt;/h1&gt;&lt;%
+      }
+  %p Here, simply, if our starting level and current level match, let's spit out the heading for this section of the nav.
+  %pre
+    :preserve
+
+      if (blnTarget) { %&gt;&lt;ul&gt;&lt;% }
+
+  %p We're at (or beyond) our target so we need to get ready to start drawing some nav nodes.
+  %pre
+    :preserve
+
+      var objNav = root.getElementsByTagName("nav[@level = '" + level + "']");
+      for (var i=0; i &lt; objNav.length; i++) {
+
+  %p These lines initialize the objNav nodelist, which is essentially a list of all elements which are at or within the current xml chunk. And then we kick off a little loop through those elements.
+  %pre
+    :preserve
+
+      var strHref = new String(objNav.item(i).childNodes(0).getAttribute("href"));
+
+      if (this.strPage.indexOf(strHref)==0) {
+          objNav.item(i).childNodes(0).setAttribute("style", "font-weight:bold;");
+      }
+
+  %p Next, we check again to make sure that we're safe to spit out some html and then write the list item;
+  %pre
+    :preserve
+      if (blnTarget) { %&gt;
+      &lt;li&gt;&lt;%= objNav.item(i).childNodes(0).xml %&gt;&lt;% }
+
+  %p Time to get ready to kick off the recursion, and create an XML Document Object and load into it our current chunk of xml. Yippe - we get to name a variable woot.
+  %pre
+    :preserve
+
+      var tmpXML = Server.CreateObject("Msxml2.DOMDocument");
+          tmpXML.async = false;
+          tmpXML.resolveExternals = false;
+
+          tmpXML.loadXML(objNav.item(i).xml);
+
+          woot = tmpXML.documentElement;
+
+  %p We then need to have a quick poke around here to see if the page we're looking for is in this chunk of XML, if it is then we break out of our loop and proceed to the next step...
+  %pre
+    :preserve
+
+      var blnInHere = false;
+      var nodelist = woot.selectNodes("//a");
+      for (n = 0; n &lt; nodelist.length; n++) {
+          if (new String(nodelist.item(n).getAttribute("href")).indexOf(this.strPage) == 0) {
+              blnInHere = true;
+              break;
+          }
+      }
+
+  %p Finally, in preparation for recursion, we prepare the arguments for the re-call of _drawLeftNav; that is we resolve to find the nav elements at the next level within the xml, in this branch of the navigation. If there are navigation nodes and we suspect that the page we're after is in there some where - let's recurse.
+  %pre
+    :preserve
+
+      nextLevel = String.fromCharCode(intLevel + 96 + 1);
+      nextNav = woot.getElementsByTagName("nav[@level = '" + nextLevel + "']");
+
+      if (nextNav.length &gt; 0 && blnInHere) {
+          this._drawLeftNav(tmpXML, intLevel+1, targetLevel);
+      }
+
+  %p Otherwise...we let the function run it's course and close off the lists
+  %pre
+    :preserve
+
+        if (blnTarget) { %&gt;&lt;/li&gt;&lt;% }
+      }
+      if (blnTarget) { %&gt;
+      &lt;/ul&gt;&lt;% }
+
+  %p ...close the function.
+  %pre
+    :preserve
+
+      }
+
+  %p And I'm spent.
+  %p Well, not really, we're not quite done yet. I'll just quickly show you how you use this in your pages. In your .asp page, you need to declare your language and directly after that use SSI tags liberally to include your code snippets. Or call your Navigation doo-dad any way you want.
+  %pre
+    :preserve
+
+      &lt;%@LANGUAGE="JScript"%&gt;
+      &lt;!--#include file="src/classes/Navigation.asp" --&gt;
+
+      &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+      &lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;
+      &lt;body&gt;
+      &lt;!--#include file="src/html/navigationTop.asp" --&gt;
+      &lt;!--#include file="src/html/navigationBread.asp" --&gt;
+
+      ...
+
+      &lt;!--#include file="src/html/navigationLeftShallow.asp" --&gt;
+
+      ...
+
+      &lt;% Nav._drawSitemap(Nav.xmlDoc, 1) %&gt;
+
+      ...
+
+      &lt;/body&gt;
+      &lt;/html&gt;
+
+
+  %p That's it.
+  %p Did that make sense? Do you think this technique could be useful? Do you think I'm barking mad? None the less, I think that this was a triumph - the code that I've presented you is a far cry from the garbage that I began with only a week or so or go when I began preparing this document. With fresh eyes I have enjoyed reviewing my own work and cleaning this up quite a bit. It goes to show that all you code really is crap.
+  %p I've included a little download package, feel free to use, extend and debauch. Give me credit if you think that's appropriate, otherwise well, you'll have to deal with Karma.
+  %p If you feel the need to know more, feel welcome to drop me a line.
+  %ol
+    %li
+      %a{name: "1"}>
+      Some of you might be more familiar with the kinds of CMS's built by a webshop or agency, they're usually very, very smelly. I've built plenty of them and have sworn never to participate in another project where I have to build or maintain one. Check 'em out, there's hundreds if not thousands of ways of managing your site content. Frankly, it'd be cheaper to teach people how to use CVS and code HTML. Really.
+    %li
+      %a{name: "2"}>
+      I can practically hear you groan - XML!? Hey - I didn't say I was an expert XML programmer, it's simply a nifty way for us to store our site structure in a semantic and meaningful way.
+    %li
+      %a{name: "3"}>
+      Look away if you're feeling squeamish. This is the first time I've ever decided to publish some of my code for all to see on my 'blog. As you can imagine, for a developer, it's like being seen naked for the first time not just by, say, your girlfriend but by all your friends, and their friends, and people you don't even know. I hope you like what you see, hairy chest and all. Does it matter? - we already know that all your code sucks.
+    %li
+      %a{name: "4"}>
+      Again, if the code here sucks. It's not Warners fault.
+    %li
+      %a{name: "5"}>
+      Ambitiously, I'm attempting to refer to things as if they were Object Oriented, clearly they're not. Not even close. For mine though, and explaining these 'things' I've tried to align myself closely with object oriented techniques, in the hope that one day soon as I better understand these techniques and principles, this will actually be OO.
+    %ol
+
+
+%aside.col-1-4
+
+  %h3
+    Back to
+    %a{ href: href('index.html') } Travo
+
+  %h4
+    Back
+    %a{ href: href('../index.html') } Home
