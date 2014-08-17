@@ -9,7 +9,12 @@ article.x-ray
   img.joe-guitar
     width: 100%
 
-img.balloon
-  width: 103.5%
-  margin-left: -1em
-  margin-bottom: 1em
+img
+  &.balloon, &.full-width
+    width: 103.5%
+    margin-left: -1em
+    margin-bottom: 1em
+  &.padded.f-left
+    margin: 0 1em 1em 0
+  &.padded.f-right
+    margin: 0 0 1em 1em

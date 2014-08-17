@@ -37,6 +37,7 @@ h1, h2, h3, h4, h5, h6
     color: inherit
     background-color: inherit
     padding: inherit
+    padding-right: 0
     text-decoration: none
     border-bottom: 3px $color-aqua solid
 
@@ -68,9 +69,16 @@ p, li
   line-height: 1.375em
 
 li
-  list-style-type: disc
   margin-bottom: 10px
   margin-left: 20px
+
+ol, ul
+  padding: 0 1em
+ol
+  list-style: decimal outside none
+
+ul
+  list-style: disc outside none
 
 p
   &.intro
@@ -102,3 +110,8 @@ blockquote
   font-size: 26px
   line-height: 37px
   margin-bottom: 25px
+
+pre
+  font-family: monospace
+  font-size: 0.667em
+  margin: 1em 1em 2em
