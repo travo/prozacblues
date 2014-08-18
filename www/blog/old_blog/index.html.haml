@@ -6,7 +6,7 @@ title: Old Blog
 ...
 %article.col-3-4
   %h1= page.meta['title']
-  = topic_index('old_blog')
+  = include '/_index_list.html.haml', pages: input_for_index('old_blog')
 
 %aside.col-1-4
 
