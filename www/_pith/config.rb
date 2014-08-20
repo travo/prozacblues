@@ -34,18 +34,18 @@ project.helpers do
   end
 
   def recent_posts(count)
+    all_posts.take(count)
+  end
+
+  def all_posts
     posts = posts_by_path('/blog')
-    sorted(posts).reverse.take(count)
+    sorted(posts).reverse
   end
 
   def sorted(posts)
     posts.sort do |newest, oldest|
       newest.meta['post_date'] <=> oldest.meta['post_date']
     end
-  end
-
-  def snippet
-    page
   end
 
   def main_header_image
