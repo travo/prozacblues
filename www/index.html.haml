@@ -1,0 +1,50 @@
+---
+layout: '/_layout.html.haml'
+persona: 'home'
+title: Welcome
+...
+
+%article.home-border.col-1-2
+
+  %h1 Features
+
+  %h3
+    %a{ href: href('/dave/grabatology.html') }Grabatology
+  %p
+    Check out our range of gorgeous ties to download, print and wear.
+
+  %h3
+    %a{ href: href('/dave/balloon-art-in-radiotherapy.html') }Balloon Art In Radiotherapy.
+  %p
+    This is significant technical paper outlining the benefits of using balloon art in radiotherapy.
+
+  %h3
+    %a{ href: href('/dave/joe-guitar.html') }XRay Guitar
+  %p
+    See inside a guitar, using the awesome power of x-rays!
+
+
+  %h1 People
+
+  %h3
+    %a{ href: href('/dave/') }David Willis
+  %p
+    Dave is a film-maker, musician, physicist and is creative in the most delightful and surprising ways. He is the intelligence and talent behind the Prozac Blues Band.
+
+  %h3
+    %a{ href: href('/travo/') }Travis Winters
+  %p
+    Travo is a blues man, guitarist, singer, developer, husband, father and well...still an ongoing concern. Prozac Blues is maintained by Travis.
+
+
+%article.col-1-2
+
+  %h1
+    Blog
+
+  %h2
+    %a{ href: href('/blog') }Pants off living
+
+  = include '/_index_expanded.html.haml', pages: recent_posts(5), expanded: true
+
+
