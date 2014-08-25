@@ -43,9 +43,7 @@ project.helpers do
   end
 
   def sorted(posts)
-    posts.sort do |newest, oldest|
-      newest.meta['post_date'] <=> oldest.meta['post_date']
-    end
+    posts.sort_by { |post| post.published_at }
   end
 
   def main_header_image
