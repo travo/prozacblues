@@ -3,9 +3,6 @@ require 'time'
 require 'active_support/core_ext/integer/inflections'
 require 'pith/plugins/publication'
 
-project.assume_content_negotiation = true
-project.assume_directory_index = false
-
 project.helpers do
 
   def input_for_index(topic = nil)
