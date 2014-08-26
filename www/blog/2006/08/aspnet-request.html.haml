@@ -8,7 +8,7 @@ next_item: /blog/2006/08/aspnet-httphand.html
 previous_item: /blog/2006/07/takin-some-small-steps.html
 topics: pants_off_living
 ...
-%article.col-3-4
+
   %h1 ASP.NET Request and Response
   %p There are obviously going to be some differences in the way ASP.NET handles the way you pass around objects as opposed to Java. One of the things I like about the servlet model is the way you call your useBeans from the presentation layer. The useBeans are attached to the Response object - this is obviously very nifty and a handy way to do things.
   %p
@@ -17,5 +17,5 @@ topics: pants_off_living
     whether or not it's 'smart' to solve the problem in this way... I don't know.
   %p I also like that by adding things to the Response object in Java you know that they are designed to persist for the lifetime of that the response. In ASP.NET, if I'm shoving things in the Session object, they're gonna need a little bit of management since they'll persist for the entire lifetime of the session. That could be problematic... hence the concern about this not being a smart idea.
   
-%aside.col-1-4
+
 
