@@ -9,27 +9,24 @@ previous_item: /blog/2011/11/healthy-communities.html
 topics: geeky_stuff, pants_off_living
 abstract: "An overview of what it's like to maintain security in a shared hosting environment."
 ...
-
-  %h1 Community Hosting and Server Security
-  %p
-    Recently, I described some of the things you learn when you need to
-    %a{:href => "http://www.prozacblues.com/travo/blog/2011/11/healthy-communities.html"} configure a popular website
-    which is hosted with a bunch of others on community server. I wanted to also illustrate some of the experiences we've been having with hackers.
-  %p About 18 months or so ago we started to experience a spike in attempted break ins. They're fairly typical in their nature — probably a small bot-net attempting a dictionary style attack to login to our server by guessing email addresses and passwords. We've configured our mail server to start ringing alarm bells if it detects any unauthorised login attempts and then throw up a firewall.
-  %p We're now starting to encounter some more sophisticated attempts and these are targeted against specific email addresses. These attempts are still automated  and designed not to trigger the alerts. In fact, it was largely by accident that we realised this was happening. Our biggest issue here though, is that the attacker is now targeting specific user names and is guessing the password.
-  %p We're responding to this in a couple of ways, we've introduced our own firewall rules and stopped using the mail server security. This appears to have stopped the break in attempts for the moment. The 'intelligence' acquired by the hackers to profile our mail server is now useless.
-  %p We've also been in contact with our mail server software provider. They have introduced a mechanism for altering peoples login credentials for the domains concerned. The email address is no longer the same as that being used to connect. We can now employ a security prefix for a domain that looks like a subdomain for example dave@hisdomain.com authenticates as dave@mysecret.hisdomain.com the prefix "mysecret" is never leaked outside of the mail server. It acts like a domain based password. Combined with SSL connectivity, the only way someone can learn a username is by being told the prefix by the domain owner.
-  %p We're hoping that this will help to thwart the break-in attempts for a long while.
-  %p We started seeing our first attacks 18 months ago and in the last few months we're now seeing targeted attacks against our users. This is happening because email address and password combinations are becoming valuable targets. Many systems and online software are using them for logins and password recovery is often done via an existing email address. If by simply having access to read your email, a hacker could recover passwords and gain access to other systems and websites that you use.
-  %p We think that this is probably happening to other people, and by sharing our experiences we hope that you'll consider investing some time in securing your server and educating your users about their own personal security.
-  %p We'd also suggest that if your mail server authenticates using the email address, perhaps you should lobby your software provider and ask them to consider using a different authentication technique.
-  %p
-    %a{:href => "https://agilebits.com/onepassword"} 1Password by Agile Bits
-    software also goes a long way towards making the authentication and password management experience much more secure and accessible for everyone.
-  %p
-    Many thanks to
-    %a{:href => "http://www.autochthonous.org/"} David Hook
-    for co-authoring this post and providing his technical insight.
-  
-
+%h1 Community Hosting and Server Security
+%p
+  Recently, I described some of the things you learn when you need to
+  %a{:href => "http://www.prozacblues.com/travo/blog/2011/11/healthy-communities.html"} configure a popular website
+  which is hosted with a bunch of others on community server. I wanted to also illustrate some of the experiences we've been having with hackers.
+%p About 18 months or so ago we started to experience a spike in attempted break ins. They're fairly typical in their nature — probably a small bot-net attempting a dictionary style attack to login to our server by guessing email addresses and passwords. We've configured our mail server to start ringing alarm bells if it detects any unauthorised login attempts and then throw up a firewall.
+%p We're now starting to encounter some more sophisticated attempts and these are targeted against specific email addresses. These attempts are still automated  and designed not to trigger the alerts. In fact, it was largely by accident that we realised this was happening. Our biggest issue here though, is that the attacker is now targeting specific user names and is guessing the password.
+%p We're responding to this in a couple of ways, we've introduced our own firewall rules and stopped using the mail server security. This appears to have stopped the break in attempts for the moment. The 'intelligence' acquired by the hackers to profile our mail server is now useless.
+%p We've also been in contact with our mail server software provider. They have introduced a mechanism for altering peoples login credentials for the domains concerned. The email address is no longer the same as that being used to connect. We can now employ a security prefix for a domain that looks like a subdomain for example dave@hisdomain.com authenticates as dave@mysecret.hisdomain.com the prefix "mysecret" is never leaked outside of the mail server. It acts like a domain based password. Combined with SSL connectivity, the only way someone can learn a username is by being told the prefix by the domain owner.
+%p We're hoping that this will help to thwart the break-in attempts for a long while.
+%p We started seeing our first attacks 18 months ago and in the last few months we're now seeing targeted attacks against our users. This is happening because email address and password combinations are becoming valuable targets. Many systems and online software are using them for logins and password recovery is often done via an existing email address. If by simply having access to read your email, a hacker could recover passwords and gain access to other systems and websites that you use.
+%p We think that this is probably happening to other people, and by sharing our experiences we hope that you'll consider investing some time in securing your server and educating your users about their own personal security.
+%p We'd also suggest that if your mail server authenticates using the email address, perhaps you should lobby your software provider and ask them to consider using a different authentication technique.
+%p
+  %a{:href => "https://agilebits.com/onepassword"} 1Password by Agile Bits
+  software also goes a long way towards making the authentication and password management experience much more secure and accessible for everyone.
+%p
+  Many thanks to
+  %a{:href => "http://www.autochthonous.org/"} David Hook
+  for co-authoring this post and providing his technical insight.
 

@@ -8,36 +8,33 @@ next_item: /blog/2006/11/minh-tan-ii.html
 previous_item: /blog/2006/10/the-fickle-world-of-hits.html
 topics: pants_off_living
 ...
-
-  %h1 Weird Browser/Servlet behaviour
-  %p
-    I'm experiencing some strange browser behaviour with my latest JSP/Servlet project. I think it's got something to do with the HttpKeepAlive header property that is set to true by default in Firefox. Mark Pruett
-    %a{:href => "http://www.oreillynet.com/xml/blog/2006/10/what_i_didnt_know_about_xhr.html?CMP=OTC-TY3388567169&ATT=What+I+Didn+t+Know+About+XHR"} describes the Firefox settings well
-    and its relation to the HTTP 1.0/1.1 spec. but my problem, while related, is a little different.
-  %p I'm using the servlet controller and command pattern which is nifty, some pages are generated on a GET command, others on a form POST command - you know, usual web page type stuff. Sometimes I like to hit the 'GO' button at the end of the browser address bar to go to the default action of the current url / controller context. By doing this - calling the default url - this should recognise that there is no action present in the request and resolve to call the default action.
-  %p
-    Both IE and Firefox are behaving strangely. Firstly, both aren't resolving the default action. Firefox causes a null pointer exeption, related to their not being
-    %em enough
-    parameters in the post headers. IE doesn't appear to be posting at all! As a result, no such error appears. Out-putting the raw
-    %code request.getAttribute("action")
-    to the console shows me that IE generates no servlet activity. Firefox fires off a request, and the incoming action is null.
-  %p Hang on, I'm investigating this as I write this...
-  %p
-    What a dill-pickle! I had a
-    %code private String action;
-    declared at a class level. Tool. It should of course have been
-    = succeed "in" do
-      %code String action = "default_home";
-    the doPost. Oops.
-  %p
-    Mind you the LiveHttpHeaders extension for Firefox is
-    %strong very
-    handy.
-  %p
-    Furthermore, this doesn't explain why IE
-    = succeed "!" do
-      %strong does nothing
-  %p Posting this I realise I need a new category, perhaps 'pants-off programming' since these posts seem (ironically) really off topic from time to time.
-  
-
+%h1 Weird Browser/Servlet behaviour
+%p
+  I'm experiencing some strange browser behaviour with my latest JSP/Servlet project. I think it's got something to do with the HttpKeepAlive header property that is set to true by default in Firefox. Mark Pruett
+  %a{:href => "http://www.oreillynet.com/xml/blog/2006/10/what_i_didnt_know_about_xhr.html?CMP=OTC-TY3388567169&ATT=What+I+Didn+t+Know+About+XHR"} describes the Firefox settings well
+  and its relation to the HTTP 1.0/1.1 spec. but my problem, while related, is a little different.
+%p I'm using the servlet controller and command pattern which is nifty, some pages are generated on a GET command, others on a form POST command - you know, usual web page type stuff. Sometimes I like to hit the 'GO' button at the end of the browser address bar to go to the default action of the current url / controller context. By doing this - calling the default url - this should recognise that there is no action present in the request and resolve to call the default action.
+%p
+  Both IE and Firefox are behaving strangely. Firstly, both aren't resolving the default action. Firefox causes a null pointer exeption, related to their not being
+  %em enough
+  parameters in the post headers. IE doesn't appear to be posting at all! As a result, no such error appears. Out-putting the raw
+  %code request.getAttribute("action")
+  to the console shows me that IE generates no servlet activity. Firefox fires off a request, and the incoming action is null.
+%p Hang on, I'm investigating this as I write this...
+%p
+  What a dill-pickle! I had a
+  %code private String action;
+  declared at a class level. Tool. It should of course have been
+  = succeed "in" do
+    %code String action = "default_home";
+  the doPost. Oops.
+%p
+  Mind you the LiveHttpHeaders extension for Firefox is
+  %strong very
+  handy.
+%p
+  Furthermore, this doesn't explain why IE
+  = succeed "!" do
+    %strong does nothing
+%p Posting this I realise I need a new category, perhaps 'pants-off programming' since these posts seem (ironically) really off topic from time to time.
 
