@@ -23,7 +23,13 @@
 
     .main.grid.blog
 
-      = yield
+      %article.col-3-4
+
+        = yield
+
+      %aside.col-1-4
+
+        ~ include('/_post_meta.html.haml')
 
     ~ include('/_post_siblings.html.haml')
 
