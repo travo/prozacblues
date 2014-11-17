@@ -4,7 +4,7 @@ main_image: '/images/guide-to-pants-off-living-rocks.jpg'
 persona: 'Post'
 title: Leadership and Stories
 published: 2014-09-16
-next_item:
+next_item: /blog/2014/11/do-doing-done.html
 previous_item: /blog/2014/07/on-hackdays.html
 topics: leadership, pants_off_living
 abstract: "Story telling and great leadership are often associated together. Great stories are beneficial not just for the audience but also the narrator."

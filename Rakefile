@@ -21,7 +21,7 @@ task :build  do
   sh 'pith -i www build'
 end
 
-desc 'Bootstrap a new blog post'
+desc "'Bootstrap a new blog post — rake post['Do Doing Done']'"
 task :post, [:title] do |t, args|
   title = args[:title]
   slug  = title.parameterize
